@@ -1,0 +1,14 @@
+For EL7:
+
+Install  EPEL   from   http://www.unixmen.com/install-epel-repository-centos-rhel-7/
+rpm -Uvh http://li.nux.ro/download/nux/dextop/el7/x86_64/nux-dextop-release-0-1.el7.nux.noarch.rpm
+
+For EL6:
+
+rpm -Uvh http://dl.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm
+rpm -Uvh http://li.nux.ro/download/nux/dextop/el6/x86_64/nux-dextop-release-0-2.el6.nux.noarch.rpm
+
+Now:
+
+yum update
+yum  install vlc
