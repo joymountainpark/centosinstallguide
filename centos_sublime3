@@ -1,0 +1,28 @@
+Install Sublime Text 3
+
+$ cd ~/Downloads
+ 
+## On 32bit
+$ wget http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3083_x32.tar.bz2
+ 
+## On 64bit
+$ wget http://c758482.r82.cf2.rackcdn.com/sublime_text_3_build_3083_x64.tar.bz2
+
+## On 32bit
+$ sudo tar -vxjf sublime_text_3_build_3083_x32.tar.bz2 -C /opt
+ 
+## On 64bit
+$ sudo tar -vxjf sublime_text_3_build_3083_x64.tar.bz2 -C /opt
+
+$ sudo ln -s /opt/sublime_text_3/sublime_text /usr/bin/sublime3
+
+$ sublime3
+
+User Settings 
+	color_scheme": "Packages/Color Scheme - Default/Solarized (Dark).tmTheme",
+	"font_face": "Code New Roman",
+	"font_options":
+	[
+		"bold"
+	],
+	"font_size": 12

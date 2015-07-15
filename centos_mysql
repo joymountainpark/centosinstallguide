@@ -1,0 +1,78 @@
+Login as root database admin to MySQL server:
+# mysql -u root
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 2 to server version: 5.0.27
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+
+mysql>
+
+Delete ALL users who are not root:
+mysql> delete from mysql.user where not (host="localhost" and user="root");
+Query OK, 5 rows affected (0.15 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+Change root database admin password: (note: once this step is complete you’ll need to login with: mysql -p -u root)
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+Change root username to something less guessable for higher security.
+mysql> update mysql.user set user="mydbadmin" where user="root";
+Query OK, 2 rows affected (0.00 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+Remove anonymous access to the database(s):
+mysql> DELETE FROM mysql.user WHERE User = '';
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+Add a new user with database admin privs for all databases:
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'warren'@'localhost' IDENTIFIED BY 'mypass' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+
+Add a new user with database admin privs for a specific database, in this case the database is called “bugzilla”: (note: The ‘bugzilla’ database must first be added, see below.)
+
+mysql> GRANT ALL PRIVILEGES ON bugzilla.* TO 'warren'@'localhost' IDENTIFIED BY 'mypass';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+mysql> 
+
+Alternatively, you can give someone access to only certain privileges by substituting "ALL PRIVILEGES"
+with any combination of the following (commas included):
+SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES
+
+Add a MySQL database:
+mysql> create database bugzilla;
+Query OK, 1 row affected (0.15 sec)
+
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> quit
+Bye
