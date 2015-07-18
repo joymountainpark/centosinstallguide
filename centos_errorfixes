@@ -1,0 +1,24 @@
+CentOS TSC calibration failed error when booting.
+
+[ 0.000000] Fast TSC calibration failed.
+
+위의 부분은 부팅시 발생되는 부분이며, TSC는 Time Stamp Counter의 약자이더군요.
+해결방법은 다음과 같이 하시면 해결하실 수 있습니다.
+
+/etc/default/grub 마지막줄에
+
+GRUB_CMDLINE_LINUX="clocksource=tsc"
+
+위의 항목을 넣어주시고 다음과 같은 명령을 수행하여 주시기 바랍니다.
+
+[root@dev ~]# grub2-mkconfig -o /boot/grub2/grub.cfg
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-123.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-123.el7.x86_64.img
+Found linux image: /boot/vmlinuz-0-rescue-b161999d89d0472890f8a83cc933a9fb
+Found initrd image: /boot/initramfs-0-rescue-b161999d89d0472890f8a83cc933a9fb.img
+done
+[root@dev ~]#
+
+위와 같이 출력되고 나신 뒤부터는 정상적인 부분을 보실 수 있습니다.
+위의 에러는 3.x 커널에 vmware 4.x 버젼에서 발생된다고 합니다.
