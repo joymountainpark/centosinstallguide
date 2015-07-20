@@ -1,0 +1,70 @@
+Step #1: Add the MariaDB Repository
+
+First, you’ll follow a simple best practice: ensuring the list of available packages is up to date before installing anything new:
+
+yum -y update
+
+Now find which repo you should use with the MariaDB repository generator. We’re going to add the CentOS 7 (64 bit) MariaDB 10.0 repository.
+
+For a refresher on editing files with vim see: New User Tutorial: Overview of the Vim Text Editor
+
+vim /etc/yum.repos.d/MariaDB10.repo
+
+# MariaDB 10.0 CentOS repository list – created 2014-10-13 13:04 UTC
+# http://mariadb.org/mariadb/repositories/
+[mariadb]
+name = MariaDB
+baseurl = http://yum.mariadb.org/10.0/centos7-amd64
+gpgkey=https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+gpgcheck=1
+
+Then exit and save the file with the command :wq .
+Step #2: Remove the Existing MariaDB Installation
+Be sure to backup MariaDB and/or your entire server before proceeding with the following instructions!
+Removing MariaDB will remove services that depend on MariaDB!
+
+Stop MariaDB:
+
+
+systemctl stop mariadb
+
+Remove the existing MariaDB packages:
+
+
+yum remove mariadb-server mariadb mariadb-libs
+
+Clean-up the repository cache information with the following command:
+
+
+yum clean all
+
+Step #3: Install MariaDB 10.0
+
+At this point, installing MariaDB 10.0 is as simple as running just one command:
+
+
+yum -y install MariaDB-server MariaDB-client
+
+And then start MariaDB again:
+
+
+systemctl start mysql
+
+Be sure that MariaDB is set to start at boot:
+
+
+systemctl enable mysql
+
+Run mysql_upgrade:
+
+
+mysql_upgrade
+
+Verify MySQL is now MariaDB by using the command client:
+
+
+mysql
+
+Welcome to the MariaDB monitor. Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 10.0.14-MariaDB MariaDB Server
