@@ -1,0 +1,11 @@
+Centos Video Card Modification on Lenovo X201
+
+yum install 
+
+libpackagekit-glib2-18-1.0.0-4.1.x86_64.rpm
+
+yum install
+
+intel-linux-graphics-installer-1.1.0-21.intel20151.x86_64.rpm
+
+
