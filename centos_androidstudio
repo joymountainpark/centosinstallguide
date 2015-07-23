@@ -1,0 +1,16 @@
+Latest JDK install
+sudo yum install java-1.8.0-openjdk-devel.x86_64
+
+Switch JDK
+/usr/sbin/alternatives --config java
+
+Download Android Studio IDE for Linux
+
+Double-Click on Archive and Extract into /tmp
+su - 
+
+chown -R root:root /tmp/android-studio && mv /tmp/android-studio /opt
+
+ln -s /opt/android-studio/bin/studio.sh /usr/local/bin/aside
+
+aside
