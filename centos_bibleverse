@@ -1,0 +1,20 @@
+install fortune-mod(a tiny program uses a .txt database file and displays random epigram)
+
+yum install -y fortune-mod
+
+--> The main fortune program binary is located in /usr/bin/fortune
+
+install KJV fortunes mod text file
+
+cd /usr/local
+mkdir fortune
+cd fortune
+wget -q http://www.pc-freak.net/files/bible-fortunes-mod-file.tar.bz2
+
+# See also in Linux Driver folder
+tar -jxf bible-fortunes-mod-file.tar.bz2
+
+/usr/bin/fortune /usr/local/fortune/bible 
+
+put below test in ~/.bash_profile
+/usr/bin/fortune -s /usr/local/fortune/
