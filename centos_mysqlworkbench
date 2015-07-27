@@ -31,3 +31,15 @@ cat /var/log/messages | tail -1
 or again at the messages, but looking for any Workbench like lines only:
 
 grep Workbench /var/log/messages
+
+
+#Service Start
+
+systemctl status mysqld.service
+systemctl restart mysqld.service
+
+#if above command fails
+for i in `ps auxf|grep mysqld|grep "grep" -v|awk '{print $2}'`; do kill -9 $i; done
+
+systemctl start mysqld.service
+systemctl status mysqld.service
