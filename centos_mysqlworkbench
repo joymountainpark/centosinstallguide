@@ -1,0 +1,33 @@
+# yum install mysql-community-release-el7-5.noarch.rpm
+--> this installs the mysql repository with MySQL and Workbench rpm packages (and others) - this probably you have installed and as a result of that, you do read this post...
+--> the installation is like the local one from the rpm file - you can get it from the Oracle MySQL web at http://dev.mysql.com/downloads/repo/yum/ - get the rpm file for Red Hat Enetrprise Linux 7
+
+# yum install epel-release
+--> installation of the epel repository from the mandatory extras repo - this will make the proj package available
+
+# yum install proj
+--> installation of the proj library from epel repo
+
+# yum install tinyxml
+--> installation of the tinyxml library from epel repo
+
+# yum install libzip
+--> installation of the libzip library from mandatory base repo
+
+--> the libaries tinyxml and libzip are required to run the Workbench, but it's installation rpm package doesn't inform on it and doesn't get them from the repos
+
+# yum install mysql-workbench-community
+--> finally the installation of the Workbench
+
+Of course everything above can be done with much less typing since yum accepts the list of packages to be installed put in one line just only. I have made it so detail for better understanding.
+
+In case of some other installation problems with this or anyone else package it is good idea to look at the yum log file:
+cat /var/log/yum.log | tail -1
+
+or at the log messages file:
+
+cat /var/log/messages | tail -1
+
+or again at the messages, but looking for any Workbench like lines only:
+
+grep Workbench /var/log/messages
