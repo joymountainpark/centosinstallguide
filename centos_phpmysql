@@ -1,0 +1,121 @@
+I will add EPEL-7 repo here to install latest phpMyAdmin as follows:
+
+rpm -ivh http://dl.fedoraproject.org/pub/epel/beta/7/x86_64/epel-release-7-0.2.noarch.rpm
+
+To install MySQL, we do install mariadb like this:
+
+yum -y install mariadb-server mariadb
+
+systemctl start mariadb.service
+systemctl enable mariadb.service
+
+mysql_secure_installation
+
+
+[root@server1 ~]# mysql_secure_installation
+/usr/bin/mysql_secure_installation: line 379: find_mysql_client: command not found
+
+NOTE: RUNNING ALL PARTS OF THIS SCRIPT IS RECOMMENDED FOR ALL MariaDB
+      SERVERS IN PRODUCTION USE!  PLEASE READ EACH STEP CAREFULLY!
+
+In order to log into MariaDB to secure it, we'll need the current
+password for the root user.  If you've just installed MariaDB, and
+you haven't set the root password yet, the password will be blank,
+so you should just press enter here.
+
+Enter current password for root (enter for none): <--ENTER
+OK, successfully used password, moving on...
+
+Setting the root password ensures that nobody can log into the MariaDB
+root user without the proper authorisation.
+
+Set root password? [Y/n]
+New password: <--yourmariadbpassword
+Re-enter new password: <--yourmariadbpassword
+Password updated successfully!
+Reloading privilege tables..
+ ... Success!
+
+
+By default, a MariaDB installation has an anonymous user, allowing anyone
+to log into MariaDB without having to have a user account created for
+them.  This is intended only for testing, and to make the installation
+go a bit smoother.  You should remove them before moving into a
+production environment.
+
+Remove anonymous users? [Y/n] <--ENTER
+ ... Success!
+
+Normally, root should only be allowed to connect from 'localhost'.  This
+ensures that someone cannot guess at the root password from the network.
+
+Disallow root login remotely? [Y/n] <--ENTER
+ ... Success!
+
+By default, MariaDB comes with a database named 'test' that anyone can
+access.  This is also intended only for testing, and should be removed
+before moving into a production environment.
+
+Remove test database and access to it? [Y/n] <--ENTER
+ - Dropping test database...
+ ... Success!
+ - Removing privileges on test database...
+ ... Success!
+
+Reloading the privilege tables will ensure that all changes made so far
+will take effect immediately.
+
+Reload privilege tables now? [Y/n] <--ENTER
+ ... Success!
+
+Cleaning up...
+
+All done!  If you've completed all of the above steps, your MariaDB
+installation should now be secure.
+
+Thanks for using MariaDB!
+[root@server1 ~]#
+
+CentOS 7.0 ships with apache 2.4. Apache2 is directly available as a CentOS 7.0 package, therefore we can install it like this:
+
+yum -y install httpd
+
+systemctl start httpd.service
+systemctl enable httpd.service
+
+In CentOS 7.0 uses Firewall-cmd, so I will customize it to allow external access to port 80 (http) and 443 (https).
+
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+
+Now direct your browser to http://192.168.0.100, and you should see the Apache2 placeholder page: 
+
+We can install PHP5 and the Apache PHP5 module as follows:
+
+yum -y install php
+
+We must restart Apache afterwards:
+
+systemctl restart httpd.service
+
+To get MySQL support in PHP, we can install the php-mysql package. It's a good idea to install some other PHP5 modules as well as you might need them for your applications. You can search for available PHP5 modules like this:
+
+yum search php
+
+yum -y install php-mysql
+
+In the next step I will install some common PHP modules that are required by CMS Systems like Wordpress, Joomla and Drupal:
+
+yum -y install php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
+
+Now restart Apache2:
+
+systemctl restart httpd.service
+
+phpMyAdmin is a web interface through which you can manage your MySQL databases.
+phpMyAdmin can now be installed as follows:
+
+yum install phpMyAdmin
+
+systemctl restart  httpd.service

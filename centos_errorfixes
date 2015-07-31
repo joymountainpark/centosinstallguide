@@ -7,7 +7,7 @@ CentOS TSC calibration failed error when booting.
 
 /etc/default/grub 마지막줄에
 
-GRUB_CMDLINE_LINUX="clocksource=tsc"
+GRUB_CMDLINE_LINUX="clocksource=acpi_pm"
 
 위의 항목을 넣어주시고 다음과 같은 명령을 수행하여 주시기 바랍니다.
 
@@ -22,3 +22,4 @@ done
 
 위와 같이 출력되고 나신 뒤부터는 정상적인 부분을 보실 수 있습니다.
 위의 에러는 3.x 커널에 vmware 4.x 버젼에서 발생된다고 합니다.
+
