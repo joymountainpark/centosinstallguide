@@ -1,0 +1,15 @@
+1) Install dependency packages
+yum install dkms kernel-devel kernel-headers
+
+2) Add Required Yum Repositories
+cd /etc/yum.repos.d/
+wget http://download.virtualbox.org/virtualbox/rpm/el/virtualbox.repo
+
+3) Install VirtualBox
+yum install VirtualBox-4.3
+
+4) Rebuild Kernel Modules
+/etc/init.d/vboxdrv setup
+
+5) Launch VirtualBox
+VirtualBox
